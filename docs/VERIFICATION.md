@@ -8,7 +8,7 @@ Testes automatizados não substituem a validação em aparelho: pareamento, reco
 
 ## Verificação da edição pública — 2026-10-06
 
-- 31 testes C# aprovados, incluindo funcionamento sem integração configurada.
+- 32 testes C# aprovados, incluindo funcionamento sem integração configurada.
 - 9 testes JVM aprovados; APK debug compilado e lint aprovado.
 - Interoperabilidade C# ↔ Kotlin, editor de ações WPF e smoke tests do Studio aprovados.
 - Pacote Windows inclui licença MIT e avisos das dependências.

@@ -15,6 +15,12 @@ public sealed class IntegrationMetricsTests
         Assert.Equal(false, values["display.blackout"]);
     }
     [Fact]
+    public void UnavailableCatalogDoesNotInterruptCoreMetrics()
+    {
+        var source = new ConfiguredIntegrationMetrics(() => throw new IOException("Unavailable catalog"));
+        Assert.Equal(false, source.Sample()["display.blackout"]);
+    }
+    [Fact]
     public void UnavailableIntegrationClearsGenericBlackout()
     {
         var source = new ConfiguredIntegrationMetrics(() => new ActionCatalog { Actions = [new() {
