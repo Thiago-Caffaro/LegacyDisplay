@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "screen": { "width": 800, "height": 1280, "background": "#101820" },
+  "widgets": [
+    { "id": "title", "type": "text", "x": 40, "y": 40, "width": 720, "height": 80, "text": "LegacyDisplay", "style": { "fontSize": 50, "fontWeight": "bold", "color": "#6DE5B7" } },
+    { "id": "gpu-name", "type": "value", "x": 40, "y": 128, "width": 720, "height": 56, "source": "pc.gpu.name", "style": { "fontSize": 24, "color": "#A7BAC8" } },
+    { "id": "cpu-label", "type": "text", "x": 40, "y": 224, "width": 340, "height": 48, "text": "CPU", "style": { "fontSize": 26, "color": "#A7BAC8" } },
+    { "id": "ram-label", "type": "text", "x": 420, "y": 224, "width": 340, "height": 48, "text": "RAM", "style": { "fontSize": 26, "color": "#A7BAC8" } },
+    { "id": "cpu", "type": "value", "x": 40, "y": 280, "width": 340, "height": 112, "source": "pc.cpu.usage", "format": "{value} %", "style": { "fontSize": 58, "background": "#1B2B38", "borderRadius": 16, "alignment": "center" } },
+    { "id": "ram", "type": "value", "x": 420, "y": 280, "width": 340, "height": 112, "source": "pc.memory.usage", "format": "{value} %", "style": { "fontSize": 58, "background": "#1B2B38", "borderRadius": 16, "alignment": "center" } },
+    { "id": "temperature-label", "type": "text", "x": 40, "y": 432, "width": 340, "height": 48, "text": "GPU · TEMPERATURA", "style": { "fontSize": 24, "color": "#A7BAC8" } },
+    { "id": "power-label", "type": "text", "x": 420, "y": 432, "width": 340, "height": 48, "text": "GPU · POTÊNCIA", "style": { "fontSize": 24, "color": "#A7BAC8" } },
+    { "id": "gpu-temperature", "type": "value", "x": 40, "y": 488, "width": 340, "height": 112, "source": "pc.gpu.temperature", "format": "{value} °C", "style": { "fontSize": 56, "background": "#1B2B38", "borderRadius": 16, "alignment": "center", "color": "#6DE5B7" } },
+    { "id": "gpu-power", "type": "value", "x": 420, "y": 488, "width": 340, "height": 112, "source": "pc.gpu.powerWatts", "format": "{value} W", "style": { "fontSize": 50, "background": "#1B2B38", "borderRadius": 16, "alignment": "center" } },
+    { "id": "load-label", "type": "text", "x": 40, "y": 640, "width": 340, "height": 48, "text": "GPU · USO", "style": { "fontSize": 24, "color": "#A7BAC8" } },
+    { "id": "vram-label", "type": "text", "x": 420, "y": 640, "width": 340, "height": 48, "text": "VRAM UTILIZADA", "style": { "fontSize": 24, "color": "#A7BAC8" } },
+    { "id": "gpu-load", "type": "value", "x": 40, "y": 696, "width": 340, "height": 112, "source": "pc.gpu.usage", "format": "{value} %", "style": { "fontSize": 56, "background": "#1B2B38", "borderRadius": 16, "alignment": "center" } },
+    { "id": "gpu-vram", "type": "value", "x": 420, "y": 696, "width": 340, "height": 112, "source": "pc.gpu.memory.usedMiB", "format": "{value} MiB", "style": { "fontSize": 38, "background": "#1B2B38", "borderRadius": 16, "alignment": "center" } },
+    { "id": "ping", "type": "button", "x": 40, "y": 896, "width": 720, "height": 128, "text": "TESTAR AÇÃO NO PC", "action": "demo.ping", "style": { "fontSize": 34, "fontWeight": "bold", "background": "#6DE5B7", "color": "#101820", "borderRadius": 16, "alignment": "center" } },
+    { "id": "result", "type": "value", "x": 40, "y": 1056, "width": 720, "height": 80, "source": "action.lastResult", "style": { "fontSize": 26, "color": "#A7BAC8", "alignment": "center" } }
+  ]
+}

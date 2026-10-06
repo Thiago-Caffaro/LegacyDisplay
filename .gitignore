@@ -1,0 +1,27 @@
+.tools/
+artifacts/
+**/bin/
+**/obj/
+**/build/
+**/.gradle/
+**/local.properties
+.idea/
+*.user
+*.suo
+*.log
+*.jks
+agent-device.json
+**/__pycache__/
+
+# Local configuration and credentials must never be published
+.env
+.env.*
+*.pfx
+*.p12
+**/actions.json
+**/studio-agent.json
+**/controller.json
+**/settings.json
+**/mode.json
+**/command.json
+**/status.json

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "screen": { "width": 800, "height": 1280, "background": "#101820" },
+  "widgets": [
+    { "id": "title", "type": "text", "x": 40, "y": 60, "width": 720, "height": 100, "text": "LegacyDisplay", "style": { "fontSize": 56, "fontWeight": "bold", "color": "#6DE5B7" } },
+    { "id": "subtitle", "type": "text", "x": 40, "y": 160, "width": 720, "height": 60, "text": "Seu PC, ao alcance de um toque", "style": { "fontSize": 26, "color": "#A7BAC8" } },
+    { "id": "cpu-label", "type": "text", "x": 40, "y": 280, "width": 720, "height": 60, "text": "CPU", "style": { "fontSize": 30, "color": "#A7BAC8" } },
+    { "id": "cpu", "type": "value", "x": 40, "y": 350, "width": 720, "height": 130, "source": "pc.cpu.usage", "format": "{value} %", "style": { "fontSize": 80, "background": "#1B2B38", "borderRadius": 16, "alignment": "center" } },
+    { "id": "ram-label", "type": "text", "x": 40, "y": 510, "width": 720, "height": 60, "text": "MEMÓRIA", "style": { "fontSize": 30, "color": "#A7BAC8" } },
+    { "id": "ram", "type": "value", "x": 40, "y": 580, "width": 720, "height": 130, "source": "pc.memory.usage", "format": "{value} %", "style": { "fontSize": 80, "background": "#1B2B38", "borderRadius": 16, "alignment": "center" } },
+    { "id": "ping", "type": "button", "x": 40, "y": 800, "width": 720, "height": 140, "text": "TESTAR AÇÃO NO PC", "action": "demo.ping", "style": { "fontSize": 36, "fontWeight": "bold", "background": "#6DE5B7", "color": "#101820", "borderRadius": 16, "alignment": "center" } },
+    { "id": "result", "type": "value", "x": 40, "y": 970, "width": 720, "height": 100, "source": "action.lastResult", "format": "{value}", "style": { "fontSize": 28, "color": "#A7BAC8", "alignment": "center" } }
+  ]
+}

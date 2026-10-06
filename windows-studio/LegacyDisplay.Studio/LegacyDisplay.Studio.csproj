@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <StartupObject>LegacyDisplay.Studio.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../LegacyDisplay.Studio.Core/LegacyDisplay.Studio.Core.csproj" />
+    <ProjectReference Include="../../windows-common/LegacyDisplay.Windows/LegacyDisplay.Windows.csproj" />
+    <EmbeddedResource Include="../../protocol/examples/dashboard.json" LogicalName="dashboard.json" />
+  </ItemGroup>
+</Project>

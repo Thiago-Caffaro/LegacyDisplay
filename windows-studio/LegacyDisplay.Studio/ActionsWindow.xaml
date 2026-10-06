@@ -1,0 +1,92 @@
+<Window x:Class="LegacyDisplay.Studio.ActionsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Ações dos botões · LegacyDisplay" Width="1120" Height="850" MinWidth="980" MinHeight="740"
+    WindowStartupLocation="CenterOwner" Background="#101820" Foreground="#ECF3F7" FontFamily="Segoe UI" FontSize="13" Closing="WindowClosing">
+    <Window.Resources>
+        <Style TargetType="Button"><Setter Property="Background" Value="#233544" /><Setter Property="Foreground" Value="#ECF3F7" /><Setter Property="BorderBrush" Value="#3B5263" /><Setter Property="Padding" Value="12,7" /><Setter Property="Margin" Value="3" /></Style>
+        <Style TargetType="TextBox"><Setter Property="Background" Value="#0C141C" /><Setter Property="Foreground" Value="#ECF3F7" /><Setter Property="BorderBrush" Value="#3B5263" /><Setter Property="Padding" Value="7,5" /><Setter Property="Margin" Value="0,3,0,10" /><Setter Property="CaretBrush" Value="#6DE5B7" /></Style>
+        <Style TargetType="ComboBox"><Setter Property="Foreground" Value="#101820" /><Setter Property="Margin" Value="0,3,0,10" /><Setter Property="MinHeight" Value="31" /></Style>
+        <Style TargetType="ListBox"><Setter Property="Background" Value="#101820" /><Setter Property="Foreground" Value="#ECF3F7" /><Setter Property="BorderBrush" Value="#304656" /></Style>
+        <Style TargetType="ListBoxItem"><Setter Property="Padding" Value="8,10" /></Style>
+        <Style TargetType="CheckBox"><Setter Property="Foreground" Value="#ECF3F7" /><Setter Property="Margin" Value="0,5,0,12" /></Style>
+        <Style TargetType="TextBlock"><Setter Property="TextWrapping" Value="Wrap" /></Style>
+        <Style x:Key="Label" TargetType="TextBlock"><Setter Property="Foreground" Value="#A7BAC8" /><Setter Property="Margin" Value="0,4,0,0" /></Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions><RowDefinition Height="100" /><RowDefinition Height="*" /><RowDefinition Height="90" /></Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#182733" Margin="0" VerticalAlignment="Stretch">
+            <TextBlock Text="AÇÕES DOS BOTÕES" Foreground="#6DE5B7" FontWeight="Bold" FontSize="24" Margin="20,16,20,7" />
+            <TextBlock Text="Cadastre uma ação, escolha seu identificador no botão e faça Deploy. O Agent executa no PC." Margin="20,0,20,5" />
+            <TextBlock Text="Salvar disponibiliza as ações ao Agent. Executar teste realiza a ação agora, sem usar o tablet." Foreground="#A7BAC8" Margin="20,0,20,8" FontSize="12" />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="300" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+            <Grid Margin="16,12,10,12">
+                <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="demo.ping · confirmação de toque" Foreground="#6DE5B7" Margin="0,0,0,8" />
+                    <TextBlock Text="Sempre disponível. Funções próprias em C# podem ser registradas no Agent." FontSize="12" Foreground="#A7BAC8" Margin="0,0,0,12" />
+                    <TextBlock Text="Tipo da nova ação" Style="{StaticResource Label}" />
+                    <ComboBox x:Name="NewTypeBox" SelectedValuePath="Tag" SelectedIndex="0">
+                        <ComboBoxItem Content="Chamada HTTP" Tag="http" /><ComboBoxItem Content="Abrir aplicativo" Tag="application" />
+                        <ComboBoxItem Content="Sequência de ações" Tag="sequence" /><ComboBoxItem Content="Função interna" Tag="function" />
+                    </ComboBox>
+                    <Button x:Name="AddActionButton" Content="Nova ação" Click="AddClick" Margin="0,0,0,10" />
+                    <Button x:Name="ImportMiningButton" Content="Importar MiningRoutine…" Click="ImportMiningClick" Margin="0,0,0,10" />
+                </StackPanel>
+                <ListBox x:Name="ActionsList" Grid.Row="1" DisplayMemberPath="Description" SelectionChanged="ActionSelected" />
+                <Button x:Name="DeleteActionButton" Grid.Row="2" Content="Excluir ação selecionada" Click="DeleteClick" Margin="0,10,0,0" />
+            </Grid>
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Padding="18,12,24,12">
+                <StackPanel x:Name="FormPanel" IsEnabled="False">
+                    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                        <StackPanel Margin="0,0,12,0"><TextBlock Text="Identificador · usado no botão" Style="{StaticResource Label}" /><TextBox x:Name="ActionIdBox" MaxLength="64" /></StackPanel>
+                        <StackPanel Grid.Column="1"><TextBlock Text="Nome" Style="{StaticResource Label}" /><TextBox x:Name="ActionLabelBox" MaxLength="80" /></StackPanel>
+                    </Grid>
+                    <TextBlock x:Name="ActionTypeText" Foreground="#6DE5B7" FontWeight="Bold" Margin="0,0,0,8" />
+                    <CheckBox x:Name="EnabledActionCheck" Content="Habilitada para os botões do tablet" IsChecked="True" />
+                    <StackPanel x:Name="HttpPanel" Visibility="Collapsed">
+                        <TextBlock Text="URL" Style="{StaticResource Label}" /><TextBox x:Name="HttpUrlBox" MaxLength="2048" />
+                        <Grid><Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition /></Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,12,0"><TextBlock Text="Método" Style="{StaticResource Label}" /><ComboBox x:Name="HttpMethodBox"><ComboBoxItem Content="GET" /><ComboBoxItem Content="POST" /><ComboBoxItem Content="PUT" /><ComboBoxItem Content="PATCH" /><ComboBoxItem Content="DELETE" /><ComboBoxItem Content="HEAD" /></ComboBox></StackPanel>
+                            <StackPanel Grid.Column="1"><TextBlock Text="Timeout · 100 a 7500 ms" Style="{StaticResource Label}" /><TextBox x:Name="HttpTimeoutBox" /></StackPanel>
+                        </Grid>
+                        <TextBlock Text="Content-Type" Style="{StaticResource Label}" /><ComboBox x:Name="HttpContentTypeBox" IsEditable="True"><ComboBoxItem Content="application/json" /><ComboBoxItem Content="text/plain" /><ComboBoxItem Content="application/x-www-form-urlencoded" /></ComboBox>
+                        <TextBlock Text="Corpo da requisição · vazio para GET/HEAD" Style="{StaticResource Label}" /><TextBox x:Name="HttpBodyBox" AcceptsReturn="True" Height="120" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+                        <TextBlock Text="Token Bearer · opcional" Style="{StaticResource Label}" /><PasswordBox x:Name="BearerTokenBox" Background="#0C141C" Foreground="#ECF3F7" BorderBrush="#3B5263" Padding="7,5" Margin="0,3,0,10" MaxLength="4096" />
+                        <TextBlock Text="Outros cabeçalhos · objeto JSON, exemplo: {&quot;Accept&quot;:&quot;application/json&quot;}" Style="{StaticResource Label}" /><TextBox x:Name="HttpHeadersBox" AcceptsReturn="True" Height="90" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+                        <TextBlock Text="Tokens e parâmetros ficam protegidos no usuário Windows. O tablet recebe apenas o resultado HTTP, sem o corpo da resposta." Foreground="#A7BAC8" FontSize="12" Margin="0,0,0,12" />
+                    </StackPanel>
+                    <StackPanel x:Name="ApplicationPanel" Visibility="Collapsed">
+                        <TextBlock Text="Aplicativo · caminho completo do .exe" Style="{StaticResource Label}" />
+                        <DockPanel><Button Content="Selecionar…" DockPanel.Dock="Right" Click="BrowseApplicationClick" Margin="6,3,0,10" /><TextBox x:Name="ExecutableBox" /></DockPanel>
+                        <TextBlock Text="Argumentos · um por linha, sem aspas adicionais para caminhos com espaços" Style="{StaticResource Label}" /><TextBox x:Name="ArgumentsBox" AcceptsReturn="True" Height="140" VerticalScrollBarVisibility="Auto" />
+                        <TextBlock Text="Pasta de trabalho · opcional" Style="{StaticResource Label}" /><TextBox x:Name="WorkingDirectoryBox" />
+                        <TextBlock Text="O resultado confirma o início do aplicativo; não aguarda seu encerramento." Foreground="#A7BAC8" FontSize="12" />
+                    </StackPanel>
+                    <StackPanel x:Name="SequencePanel" Visibility="Collapsed">
+                        <TextBlock Text="Etapas · executadas em ordem; a sequência para na primeira falha" Style="{StaticResource Label}" />
+                        <ListBox x:Name="StepsList" DisplayMemberPath="Description" Height="180" Margin="0,8,0,12" SelectionChanged="StepSelected" />
+                        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="170" /></Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,0,12,0"><TextBlock Text="Ação da etapa" Style="{StaticResource Label}" /><ComboBox x:Name="StepActionBox" /></StackPanel>
+                            <StackPanel Grid.Column="1"><TextBlock Text="Pausa antes · ms" Style="{StaticResource Label}" /><TextBox x:Name="StepDelayBox" Text="0" /></StackPanel>
+                        </Grid>
+                        <WrapPanel><Button Content="Adicionar etapa" Click="AddStepClick" /><Button Content="Atualizar etapa" Click="UpdateStepClick" /><Button Content="Excluir etapa" Click="DeleteStepClick" /><Button Content="Subir" Click="StepUpClick" /><Button Content="Descer" Click="StepDownClick" /></WrapPanel>
+                        <TextBlock Text="Limite total de 8 segundos por toque, incluindo chamadas HTTP e pausas." Foreground="#A7BAC8" FontSize="12" Margin="0,12,0,12" />
+                    </StackPanel>
+                    <StackPanel x:Name="FunctionPanel" Visibility="Collapsed">
+                        <TextBlock Text="Identificador da função registrada no Agent" Style="{StaticResource Label}" /><TextBox x:Name="FunctionBox" />
+                        <TextBlock Text="Nesta versão, demo.ping confirma o toque. Outras funções exigem registro no código C# do Agent." Foreground="#A7BAC8" FontSize="12" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Border Grid.Row="2" Background="#182733" Padding="18,10">
+            <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                <TextBlock x:Name="ActionStatusText" Text="Cadastre uma ação para usar nos botões." VerticalAlignment="Center" Margin="0,0,20,0" />
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center"><Button x:Name="ApplyActionButton" Content="Aplicar ação" Click="ApplyClick" /><Button x:Name="TestActionButton" Content="Executar teste" Click="TestClick" /><Button x:Name="SaveActionsButton" Content="Salvar ações" Click="SaveClick" Background="#6DE5B7" Foreground="#101820" FontWeight="Bold" /><Button Content="Cancelar" Click="CancelClick" /></StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

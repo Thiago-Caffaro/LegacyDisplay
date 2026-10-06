@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../windows-agent/LegacyDisplay.Agent/LegacyDisplay.Agent.csproj" />
+    <ProjectReference Include="../../windows-studio/LegacyDisplay.Studio.Core/LegacyDisplay.Studio.Core.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2"><PrivateAssets>all</PrivateAssets></PackageReference>
+    <None Include="../../protocol/examples/dashboard.json" Link="dashboard.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../protocol/examples/dashboard-mining.json" Link="dashboard-mining.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../protocol/examples/layout-conformance.json" Link="layout-conformance.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

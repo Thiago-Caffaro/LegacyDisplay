@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "screen": {
+    "width": 1280,
+    "height": 800,
+    "background": "#101820"
+  },
+  "widgets": [
+    {
+      "id": "title",
+      "type": "text",
+      "x": 40,
+      "y": 30,
+      "width": 1200,
+      "height": 70,
+      "text": "MINING ROUTINE",
+      "style": {
+        "fontSize": 44,
+        "fontWeight": "bold",
+        "color": "#6DE5B7"
+      }
+    },
+    {
+      "id": "cpu",
+      "type": "value",
+      "x": 40,
+      "y": 130,
+      "width": 560,
+      "height": 100,
+      "source": "pc.cpu.usage",
+      "format": "CPU · {value} %",
+      "style": {
+        "fontSize": 40,
+        "alignment": "center",
+        "background": "#1B2B38",
+        "borderRadius": 12
+      }
+    },
+    {
+      "id": "gpu",
+      "type": "value",
+      "x": 640,
+      "y": 130,
+      "width": 600,
+      "height": 100,
+      "source": "pc.gpu.temperature",
+      "format": "GPU · {value} °C",
+      "style": {
+        "fontSize": 40,
+        "alignment": "center",
+        "background": "#1B2B38",
+        "borderRadius": 12
+      }
+    },
+    {
+      "id": "auto",
+      "type": "button",
+      "x": 40,
+      "y": 270,
+      "width": 360,
+      "height": 150,
+      "text": "AUTO",
+      "action": "mining.auto",
+      "style": {
+        "fontSize": 40,
+        "fontWeight": "bold",
+        "alignment": "center",
+        "background": "#6DE5B7",
+        "color": "#101820",
+        "borderRadius": 12
+      }
+    },
+    {
+      "id": "paused",
+      "type": "button",
+      "x": 460,
+      "y": 270,
+      "width": 360,
+      "height": 150,
+      "text": "PAUSAR",
+      "action": "mining.paused",
+      "style": {
+        "fontSize": 40,
+        "fontWeight": "bold",
+        "alignment": "center",
+        "background": "#F2BE70",
+        "color": "#101820",
+        "borderRadius": 12
+      }
+    },
+    {
+      "id": "force",
+      "type": "button",
+      "x": 880,
+      "y": 270,
+      "width": 360,
+      "height": 150,
+      "text": "FORÇAR\nMINERAÇÃO",
+      "action": "mining.force_mine",
+      "style": {
+        "fontSize": 36,
+        "fontWeight": "bold",
+        "alignment": "center",
+        "background": "#72B9ED",
+        "color": "#101820",
+        "borderRadius": 12
+      }
+    },
+    {
+      "id": "exit-night",
+      "type": "button",
+      "x": 880,
+      "y": 460,
+      "width": 360,
+      "height": 100,
+      "text": "SAIR DO NOTURNO",
+      "action": "mining.exit_night",
+      "style": {
+        "fontSize": 28,
+        "alignment": "center",
+        "background": "#304656",
+        "borderRadius": 12
+      }
+    },
+    {
+      "id": "quiet",
+      "type": "button",
+      "x": 40,
+      "y": 460,
+      "width": 800,
+      "height": 100,
+      "text": "MINERAR · LUZES E TELAS APAGADAS",
+      "action": "mining.quiet",
+      "style": {
+        "fontSize": 30,
+        "alignment": "center",
+        "background": "#6DE5B7",
+        "color": "#101820",
+        "borderRadius": 12
+      }
+    },
+    {
+      "id": "hint",
+      "type": "text",
+      "x": 40,
+      "y": 580,
+      "width": 1200,
+      "height": 50,
+      "text": "Confirme o modo aplicado no painel do MiningRoutine.",
+      "style": {
+        "fontSize": 24,
+        "color": "#A7BAC8",
+        "alignment": "center"
+      }
+    },
+    {
+      "id": "result",
+      "type": "value",
+      "x": 40,
+      "y": 640,
+      "width": 1200,
+      "height": 80,
+      "source": "action.lastResult",
+      "format": "{value}",
+      "style": {
+        "fontSize": 26,
+        "color": "#A7BAC8",
+        "alignment": "center"
+      }
+    }
+  ]
+}
