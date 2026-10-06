@@ -103,3 +103,7 @@ O Agent usa timeout de conexão de dez segundos e de recebimento de vinte segund
 O tablet mantém o último layout e os últimos valores durante a perda da conexão. O rodapé identifica os valores como última leitura; após reiniciar o app/processo, valores começam ausentes até chegar uma nova amostra. O boot não depende do PC. Credenciais Windows usam DPAPI CurrentUser; o tablet usa armazenamento privado, sem backup Android habilitado.
 
 Wi-Fi e ADB forwarding compartilham o contrato. O canal não usa TLS neste PoC e requer LAN confiável ou USB. Pairing não autentica a identidade do tablet contra um atacante que intercepte a primeira troca.
+
+## Estado visual opcional
+
+`display.blackout` é uma fonte booleana genérica: `true` solicita escurecimento e libera o timeout da tela; `false` restaura o painel. Não representa controle físico garantido do backlight. O cliente exige conexão e sinal recente e permite despertar temporário por toque. Integrações devem emitir essa fonte periodicamente e limpar o sinal quando o estado externo não puder ser confirmado.

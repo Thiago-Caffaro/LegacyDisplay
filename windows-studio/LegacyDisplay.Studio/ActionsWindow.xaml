@@ -33,7 +33,7 @@
                         <ComboBoxItem Content="Sequência de ações" Tag="sequence" /><ComboBoxItem Content="Função interna" Tag="function" />
                     </ComboBox>
                     <Button x:Name="AddActionButton" Content="Nova ação" Click="AddClick" Margin="0,0,0,10" />
-                    <Button x:Name="ImportMiningButton" Content="Importar MiningRoutine…" Click="ImportMiningClick" Margin="0,0,0,10" />
+                    <Button x:Name="ImportMiningButton" Content="Integração opcional: MiningRoutine…" Click="ImportMiningClick" Margin="0,0,0,10" />
                 </StackPanel>
                 <ListBox x:Name="ActionsList" Grid.Row="1" DisplayMemberPath="Description" SelectionChanged="ActionSelected" />
                 <Button x:Name="DeleteActionButton" Grid.Row="2" Content="Excluir ação selecionada" Click="DeleteClick" Margin="0,10,0,0" />

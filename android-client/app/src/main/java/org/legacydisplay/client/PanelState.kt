@@ -97,7 +97,7 @@ class PanelState(private val storage: Storage, defaultLayout: String) {
         }
         require(updated.size <= 256) { "Too many sources" }
         values = updated
-        if (json.has("mining.blackout")) lastBlackoutUpdateMillis = System.currentTimeMillis()
+        if (json.has("display.blackout")) lastBlackoutUpdateMillis = System.currentTimeMillis()
         listener?.invoke()
     }
     @Synchronized fun invoke(widgetId: String): JSONObject {

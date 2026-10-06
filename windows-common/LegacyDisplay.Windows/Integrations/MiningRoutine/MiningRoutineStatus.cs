@@ -4,7 +4,7 @@ using LegacyDisplay.Windows.Actions;
 
 namespace LegacyDisplay.Windows;
 
-public sealed class MiningRoutineStatus(Func<ActionCatalog> catalog, Func<int, DateTimeOffset, bool>? alive = null)
+public sealed class MiningRoutineStatus(Func<ActionCatalog> catalog, Func<int, DateTimeOffset, bool>? alive = null) : IAdditionalMetrics
 {
     private long sampled;
     private Dictionary<string, object?> cached = Unavailable();

@@ -23,7 +23,7 @@ class PanelTests {
         val state = PanelState(MemoryStorage(), defaultLayout)
         state.update(JSONObject().put("pc.cpu.usage", 10))
         assertEquals(0L, state.lastBlackoutUpdateMillis)
-        state.update(JSONObject().put("mining.blackout", true))
+        state.update(JSONObject().put("display.blackout", true))
         val stamp = state.lastBlackoutUpdateMillis
         assertTrue(stamp > 0)
         state.update(JSONObject().put("pc.cpu.usage", 20))

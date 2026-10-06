@@ -9,11 +9,11 @@ namespace LegacyDisplay.Agent;
 
 public sealed class AgentSession
 {
-    public async Task RunAsync(DeviceCredential credential, bool demo, int intervalMs, CancellationToken cancellationToken, string? actionsPath = null)
+    public async Task RunAsync(DeviceCredential credential, bool demo, int intervalMs, CancellationToken cancellationToken, string? actionsPath = null, IAdditionalMetrics? additionalMetrics = null)
     {
         using var metrics = new WindowsMetrics();
         using var actions = new ActionExecutor(() => ActionStore.Load(actionsPath ?? ActionStore.DefaultPath));
-        var mining = new MiningRoutineStatus(() => ActionStore.Load(actionsPath ?? ActionStore.DefaultPath));
+        IAdditionalMetrics integration = additionalMetrics ?? new ConfiguredIntegrationMetrics(() => ActionStore.Load(actionsPath ?? ActionStore.DefaultPath));
         var device = new Uri(credential.Device);
         var delay = 1;
         while (!cancellationToken.IsCancellationRequested)
@@ -35,7 +35,7 @@ public sealed class AgentSession
                 var connectedAt = Environment.TickCount64;
                 using var session = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 using var sendLock = new SemaphoreSlim(1);
-                var sender = SendMetricsAsync(metrics, mining, socket, sendLock, demo, intervalMs, session.Token);
+                var sender = SendMetricsAsync(metrics, integration, socket, sendLock, demo, intervalMs, session.Token);
                 var receiver = ReceiveAsync(actions, socket, sendLock, layout, session.Token);
                 try { await await Task.WhenAny(sender, receiver); }
                 finally
@@ -60,12 +60,12 @@ public sealed class AgentSession
         }
     }
 
-    private static async Task SendMetricsAsync(WindowsMetrics metrics, MiningRoutineStatus mining, ClientWebSocket socket, SemaphoreSlim sendLock, bool demo, int intervalMs, CancellationToken cancellationToken)
+    private static async Task SendMetricsAsync(WindowsMetrics metrics, IAdditionalMetrics integration, ClientWebSocket socket, SemaphoreSlim sendLock, bool demo, int intervalMs, CancellationToken cancellationToken)
     {
         while (!cancellationToken.IsCancellationRequested)
         {
             var values = metrics.Sample(demo);
-            foreach (var value in mining.Sample()) values[value.Key] = value.Value;
+            foreach (var value in integration.Sample()) values[value.Key] = value.Value;
             await SendAsync(socket, sendLock, new { type = "data.update", values }, cancellationToken);
             await Task.Delay(intervalMs, cancellationToken);
         }

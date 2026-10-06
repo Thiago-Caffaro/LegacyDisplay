@@ -2,7 +2,7 @@
 
 As ações `mining.auto`, `mining.paused`, `mining.force_mine`, `mining.exit_night` e `mining.quiet` usam o executável publicado do MiningRoutine, com seu `data_directory` configurado. Não precisam da sessão HTTP do painel, cujo token muda a cada inicialização.
 
-Para cadastrar pela interface, abra **Ações → Importar MiningRoutine…**, selecione `C:\Projects\MiningRoutine` e clique em **Salvar ações**. Nas propriedades do Button escolha `mining.quiet` e faça **Aplicar alterações → Deploy**. Não crie uma função interna com esse nome.
+Para cadastrar pela interface, abra **Ações → Integração opcional: MiningRoutine…**, selecione `C:\Projects\MiningRoutine` e clique em **Salvar ações**. Nas propriedades do Button escolha `mining.quiet` e faça **Aplicar alterações → Deploy**. Não crie uma função interna com esse nome.
 
 Para cadastrar ou repetir a configuração pelo terminal:
 
@@ -32,7 +32,7 @@ Se mover o projeto ou alterar `data_directory`, atualize os parâmetros em **Aç
 
 O comando manual não ignora regras de processos, falhas ou pausas nativas. Aguarda mineração observada e a confirmação dos providers de iluminação antes de enviar `SC_MONITORPOWER` ao Windows. Não altera o plano de energia nem solicita suspensão do PC. Falha/interrupção restaura a iluminação pelo journal existente. Mouse/teclado ou despertar dos monitores cancelam a sessão visual manual; o modo FORCE_MINE permanece. Trocar para AUTO/PAUSADO/FORCE ou sair do noturno cancela a sessão e solicita despertar dos monitores que ela apagou. Reiniciar o controlador conserva o modo de mineração, mas não reaplica automaticamente a sessão visual manual.
 
-Tanto no automático quanto no manual, `mining.blackout` só é verdadeiro com iluminação **confirmada apagada**, `display_state=off`, runtime real e snapshot recente. O APK v0.2 usa esse sinal para cobrir o painel de preto, reduzir brilho e suspender temporariamente **Manter tela ligada**. A tela física é desligada pelo timeout configurado no Android, sem permissão de administrador do dispositivo. Preto/brilho mínimo não equivalem ao desligamento imediato do backlight.
+Tanto no automático quanto no manual, `mining.blackout` só é verdadeiro com iluminação **confirmada apagada**, `display_state=off`, runtime real e snapshot recente. O adaptador converte esse sinal em `display.blackout`; o cliente Android público usa a fonte genérica para cobrir o painel de preto, reduzir brilho e suspender temporariamente **Manter tela ligada**. A tela física é desligada pelo timeout configurado no Android, sem permissão de administrador do dispositivo. Preto/brilho mínimo não equivalem ao desligamento imediato do backlight.
 
 O primeiro toque enquanto o app ainda está acordado só revela o painel, sem disparar um botão. Depois de 15 segundos sem toque, ele volta a escurecer se o PC ainda estiver apagado. Se o Android já desligou a tela, use o botão físico de energia para despertar: o app concede os mesmos 15 segundos. O tablet não altera o estado do PC só por despertar. Configurações locais abertas mantêm o painel visível. Falta de conexão, sinal antigo por mais de 15 segundos ou confirmação falsa liberam o modo escuro; isso não força a tela física a ligar.
 

@@ -72,8 +72,8 @@ class MainActivity : Activity() {
     private fun applySettings() {
         val state = runtime.state
         val now = System.currentTimeMillis()
-        val requested = blackout.requested(state.connected, state.values["mining.blackout"], now, state.lastBlackoutUpdateMillis)
-        val dark = !dialogOpen && blackout.dark(state.connected, state.values["mining.blackout"], now, state.lastBlackoutUpdateMillis)
+        val requested = blackout.requested(state.connected, state.values["display.blackout"], now, state.lastBlackoutUpdateMillis)
+        val dark = !dialogOpen && blackout.dark(state.connected, state.values["display.blackout"], now, state.lastBlackoutUpdateMillis)
         blackoutView.visibility = if (dark) View.VISIBLE else View.GONE
         panel.visibility = if (dark) View.INVISIBLE else View.VISIBLE
         val attributes = window.attributes
