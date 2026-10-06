@@ -18,6 +18,11 @@ class MemoryStorage : Storage {
 }
 
 class PanelTests {
+    @Test fun protocolFixturePreservesUnavailableSensorKeys() {
+        val json = PocTablet.jsonValues(mapOf("pc.gpu.temperature" to null, "pc.gpu.powerWatts" to null))
+        assertTrue(json.has("pc.gpu.temperature"))
+        assertTrue(json.isNull("pc.gpu.temperature"))
+    }
     private val defaultLayout get() = File("../../protocol/examples/dashboard.json").readText()
     @Test fun unrelatedSensorUpdatesCannotRefreshAnOldBlackoutSignal() {
         val state = PanelState(MemoryStorage(), defaultLayout)
