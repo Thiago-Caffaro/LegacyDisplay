@@ -45,6 +45,9 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Studio publish failed' }
     & python scripts/collect-notices.py
     if ($LASTEXITCODE -ne 0) { throw 'Third-party notices collection failed' }
+    Copy-Item -LiteralPath LICENSE -Destination artifacts\agent\LICENSE.txt
+    Copy-Item -LiteralPath LICENSE -Destination artifacts\studio\LICENSE.txt
+    Copy-Item -LiteralPath docs\INTEGRATIONS.md -Destination artifacts\studio\INTEGRATIONS.md
     Copy-Item -LiteralPath docs\STUDIO.md -Destination artifacts\studio\LEIA-ME.md
     Copy-Item -LiteralPath docs\ACTIONS.md -Destination artifacts\studio\ACTIONS.md
     Copy-Item -LiteralPath docs\MININGROUTINE.md -Destination artifacts\studio\MININGROUTINE.md

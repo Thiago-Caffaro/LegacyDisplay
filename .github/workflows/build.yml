@@ -1,4 +1,4 @@
-name: Build and verify PoC
+name: Build and verify
 on:
   push:
   pull_request:
@@ -28,5 +28,5 @@ jobs:
         run: ./scripts/build.ps1 -Interop -JavaHome $env:JAVA_HOME
       - uses: actions/upload-artifact@v4
         with:
-          name: LegacyDisplay-v0.1
+          name: LegacyDisplay-build
           path: artifacts/
